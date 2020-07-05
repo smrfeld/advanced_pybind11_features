@@ -1,6 +1,6 @@
 # Advanced pybind11 features
 
-[You can find the corresponding Medium article here.]()
+[You can find the corresponding Medium article here.](https://medium.com/practical-coding/three-advanced-pybind11-features-for-wrapping-c-code-into-python-6dbcac169b93)
 
 This repo details three advanced pybind11 features:
 * Shared pointers.
