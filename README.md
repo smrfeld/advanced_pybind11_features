@@ -1,5 +1,7 @@
 # Advanced pybind11 features
 
+[You can find the corresponding Medium article here.]()
+
 This repo details three advanced pybind11 features:
 * Shared pointers.
 * Enum.
@@ -176,7 +178,7 @@ public:
     virtual bool is_beautiful(std::shared_ptr<Motorcycle> bike) const = 0;
 };
 ```
-and of course, no implementation for `is_a_beautiful_bike` (although you **could** have one!).
+and of course, no implementation for `is_beautiful` (although you **could** have one!).
 
 What happens when we try to add the glue code in `python/motorcycle.cpp`? If we try:
 ```
