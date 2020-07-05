@@ -2,6 +2,10 @@
 
 This repo details some advanced pybind11 features.
 
+<img src="cover.jpg" alt="drawing" width="400"/>
+
+[Image source](https://upload.wikimedia.org/wikipedia/commons/a/a4/Sr4002012.jpg).
+
 ## Requirements
 
 Obviously, you will need `pybind11`. On Mac:
@@ -51,6 +55,8 @@ The idea here is:
     DPYTHON_LIBRARY_DIR="/Users/USERNAME/opt/anaconda3/lib/python3.7/site-packages"
     DPYTHON_EXECUTABLE="/Users/USERNAME/opt/anaconda3/bin/python3"
     ```
+
+I won't review all the files here - you can find them in this repo.
 
 ## Shared pointers
 
