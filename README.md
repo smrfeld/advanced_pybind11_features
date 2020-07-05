@@ -9,7 +9,7 @@ The starting point for this project is a previous project found [here](https://g
 
 <img src="cover.jpg" alt="drawing" width="400"/>
 
-[Image source](https://upload.wikimedia.org/wikipedia/commons/a/a4/Sr4002012.jpg).
+[Image source](https://commons.wikimedia.org/wiki/File:Sr4002012.jpg).
 
 ## Requirements
 
