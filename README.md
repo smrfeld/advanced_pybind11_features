@@ -1,4 +1,4 @@
-# Miscellaneous advanced pybind11 features
+# Advanced pybind11 features
 
 This repo details three advanced pybind11 features:
 * Shared pointers.
