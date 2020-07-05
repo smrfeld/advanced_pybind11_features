@@ -1,6 +1,11 @@
 # Miscellaneous advanced pybind11 features
 
-This repo details some advanced pybind11 features.
+This repo details three advanced pybind11 features:
+* Shared pointers.
+* Enum.
+* Abstract base classes (ABC) and pure virtual methods.
+
+The starting point for this project is a previous project found [here](https://github.com/smrfeld/cmake_cpp_pybind11_tutorial).
 
 <img src="cover.jpg" alt="drawing" width="400"/>
 
@@ -16,7 +21,7 @@ will do it.
 
 ## Setup with CMake
 
-We will start with the `CMake` based setup from a previous introduction found here. 
+We will start with the `CMake` based setup from a [previous introduction found here](https://github.com/smrfeld/cmake_cpp_pybind11_tutorial). 
 Are you gonna check it out? 
 Of course not.
 No time for that!
@@ -102,60 +107,6 @@ bike.ride("mullholland")
 works as expected with output:
 ```
 Zoom Zoom on road: mullholland
-```
-
-## Passing shared arguments as constructor arguments
-
-A particular detail must be observed when passing shared pointers as arguments in constructors.
-
-Let us consider the following example, adding a `Rider` class in `cpp/include/automobile_bits/motorcycle.hpp` 
-(probably we should really do this in a new file, but let's ignore that):
-```
-class Rider {
-  
-private:
-    
-    /// Name
-    std::string _rider_name;
-        
-    /// Bike
-    std::shared_ptr<Motorcycle> _bike;
-
-public:
-    
-    /// Constructor
-    Rider(std::shared_ptr<Motorcycle> bike, std::string rider_name);
-    
-    /// Ride the bike
-    /// @param road Name of the road
-    void ride(std::string road) const;
-    
-};
-```
-with implementation in `cpp/src/motorcycle.cpp`:
-```
-void Rider::ride(std::string road) const {
-    std::cout << "Rider: " << _rider_name << std::endl;
-    _bike->ride(road);
-}
-```
-
-Now to wrap it in `python/motorcycle.cpp`:
-```
-// Rider
-// keep_alive<1,2> means that the lifetime of the param argument in the constructor (2) is tied to the lifetime of the object we are constructing (1)
-// https://pybind11.readthedocs.io/en/stable/advanced/functions.html#keep-alive
-// VERY IMPORTANT
-py::class_<autos::Rider>(m, "Rider")
-.def(py::init<std::shared_ptr<autos::Motorcycle>, std::string>(), py::arg("bike"), py::arg("rider_name"), py::keep_alive<1, 2>())
-.def("ride",
-        py::overload_cast<std::string>( &autos::Motorcycle::ride, py::const_),
-        py::arg("road"));
-```
-Notice the `keep_alive<1,2>` argument. As described, this ensures that the motorcycle shared pointer survives **at least as long** as until the rider goes out of scope.
-From the docs:
-```
-In general, this policy is required when the C++ object is any kind of container and another object is being added to the container. keep_alive<Nurse, Patient> indicates that the argument with index Patient should be kept alive at least until the argument with index Nurse is freed by the garbage collector. Argument indices start at one, while zero refers to the return value. For methods, index 1 refers to the implicit this pointer, while regular arguments begin at index 2. Arbitrarily many call policies can be specified. When a Nurse with value None is detected at runtime, the call policy does nothing.
 ```
 
 ## Enum
